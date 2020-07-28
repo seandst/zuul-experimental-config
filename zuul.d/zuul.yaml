@@ -60,13 +60,13 @@
         comment: false
         merge: true
         status: 'success'
-      postgresql:
+      pgsql:
     failure:
       github.com:
         check: failure
         comment: false
         status: 'failure'
-      postgresql:
+      pgsql:
 
 # jobs that can be run
 - job:

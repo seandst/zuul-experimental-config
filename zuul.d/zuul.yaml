@@ -13,7 +13,7 @@
     manager: independent
     precedence: normal
     trigger:
-      github.com:
+      github:
         - event: pull_request
           action:
             - opened
@@ -24,7 +24,7 @@
           label:
             - zuul:check
     success:
-      github.com:
+      github:
         check: success
         comment: false
         status: 'success'
@@ -32,11 +32,11 @@
 - pipeline:
     name: check
     description: |
-      Runs when the 'zuul:
+      Runs when the 'zuul:check-test' check is added with status 'success'
     manager: independent
     precedence: normal
     require:
-      github.com:
+      github:
         status: "oasis-zuul\\[bot\\]:check-test:success"
         open: true
         current-patchset: true
@@ -45,24 +45,24 @@
       # update to the PR, but that should happen automatically once
       # the zuul:check label is applied, or if the check-test automation
       # otherwise succeeds
-      github.com:
+      github:
         - event: pull_request
           action: status
           status: "oasis-zuul\\[bot\\]:check-test:success"
     start:
-      github.com:
+      github:
         check: in_progress
         comment: false
         status: 'pending'
     success:
-      github.com:
+      github:
         check: success
         comment: false
         merge: true
         status: 'success'
       pgsql:
     failure:
-      github.com:
+      github:
         check: failure
         comment: false
         status: 'failure'
@@ -83,7 +83,6 @@
 # test setups across the various oasis collections
 - project-template:
     name: oasis-ansible-collection
-    default-branch: master
     check-test:
       jobs:
         - check-test
@@ -91,11 +90,12 @@
 
 - project:
     name: seandst/ansible_collection_system
+    default-branch: master
     templates:
       - oasis-ansible-collection
 
 # map job requirements to nodepool labels
-- nodesets:
+- nodeset:
   - name: centos-7
     nodes:
       - name: tester

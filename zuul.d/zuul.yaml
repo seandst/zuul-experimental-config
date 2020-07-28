@@ -96,12 +96,6 @@
 
 # map job requirements to nodepool labels
 - nodeset:
-  - name: centos-7
-    nodes:
-      - name: tester
-        label: ocp-centos7
-
-- nodeset:
     name: centos-7
     nodes:
       - name: controller

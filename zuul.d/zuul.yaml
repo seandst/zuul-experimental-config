@@ -4,12 +4,6 @@
 # pipelines are trigger templates used by projects
 - pipeline:
     name: check-test
-    description: >
-      Triggered on PR opened or labeled, used to check if a PR should be
-      tested by zuul, as determined by the job run. Only reports success,
-      so the check-test playbook can fail and not result in a failing
-      check being added to a PR. A success result or adding the "zuul:check"
-      label will allow further zuul automation to run on this pull request.
     manager: independent
     precedence: normal
     trigger:
@@ -71,6 +65,12 @@
 # jobs that can be run
 - job:
     name: check-test
+    description: >
+      Triggered on PR opened or labeled, used to check if a PR should be
+      tested by zuul, as determined by the job run. Only reports success,
+      so the check-test playbook can fail and not result in a failing
+      check being added to a PR. A success result or adding the "zuul:check"
+      label will allow further zuul automation to run on this pull request.
     parent: null
     description: |
       The base-minimal job for Ansible installation of Zuul.

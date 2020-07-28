@@ -1,0 +1,6 @@
+- name: check-test debug
+  hosts:
+    - all
+  tasks:
+    - debug:
+        msg: "{{ zuul.items }}"

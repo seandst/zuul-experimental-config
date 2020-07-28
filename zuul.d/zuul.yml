@@ -1,0 +1,106 @@
+# All components are combined in a single config while prototyping,
+# but will be broken up once this stuff works
+
+# pipelines are trigger templates used by projects
+- pipeline:
+    name: check-test
+    description: >
+      Triggered on PR opened or labeled, used to check if a PR should be
+      tested by zuul, as determined by the job run. Only reports success,
+      so the check-test playbook can fail and not result in a failing
+      check being added to a PR. A success result or adding the "zuul:check"
+      label will allow further zuul automation to run on this pull request.
+    manager: independent
+    precedence: normal
+    trigger:
+      github.com:
+        - event: pull_request
+          action:
+            - opened
+            - changed
+            - reopened
+        - event: pull_request
+          action: labeled
+          label:
+            - zuul:check
+    success:
+      github.com:
+        check: success
+        comment: false
+        status: 'success'
+
+- pipeline:
+    name: check
+    description: |
+      Runs when the 'zuul:
+    manager: independent
+    precedence: normal
+    require:
+      github.com:
+        status: "oasis-zuul\\[bot\\]:check-test:success"
+        open: true
+        current-patchset: true
+    trigger:
+      # the check-test success will need to be reapplied on every
+      # update to the PR, but that should happen automatically once
+      # the zuul:check label is applied, or if the check-test automation
+      # otherwise succeeds
+      github.com:
+        - event: pull_request
+          action: status
+          status: "oasis-zuul\\[bot\\]:check-test:success"
+    start:
+      github.com:
+        check: in_progress
+        comment: false
+        status: 'pending'
+    success:
+      github.com:
+        check: success
+        comment: false
+        merge: true
+        status: 'success'
+      postgresql:
+    failure:
+      github.com:
+        check: failure
+        comment: false
+        status: 'failure'
+      postgresql:
+
+# jobs that can be run
+- job:
+    name: check-test
+    parent: null
+    description: |
+      The base-minimal job for Ansible installation of Zuul.
+    run: playbooks/check-test/run.yml
+    nodeset: centos-7
+    semaphore: semaphore-ocp4
+
+# projects map github repos to pipelines and jobs -- they glue it all together
+# this is a named template, which makes it relatively easy to keep consistent
+# test setups across the various oasis collections
+- project-template:
+    name: oasis-ansible-collection
+    default-branch: master
+    check-test:
+      jobs:
+        - check-test
+      debug: true
+
+- project:
+    name: seandst/ansible_collection_system
+    templates:
+      - oasis-ansible-collection
+
+# map job requirements to nodepool labels
+- nodesets:
+  - name: centos-7
+    nodes:
+      - name: tester
+        label: ocp-centos7
+
+- semaphore:
+    name: semaphore-ocp4
+    max: 8

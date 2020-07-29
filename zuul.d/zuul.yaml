@@ -71,8 +71,6 @@
       check being added to a PR. A success result or adding the "zuul:check"
       label will allow further zuul automation to run on this pull request.
     parent: null
-    description: |
-      The base-minimal job for Ansible installation of Zuul.
     run: playbooks/check-test/run.yml
     nodeset: rhel7
 

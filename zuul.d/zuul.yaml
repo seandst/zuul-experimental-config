@@ -15,8 +15,7 @@
             - reopened
         - event: pull_request
           action: labeled
-          label:
-            - zuul:check
+          label: 'zuul:check'
     success:
       github:
         check: success
@@ -75,8 +74,7 @@
     description: |
       The base-minimal job for Ansible installation of Zuul.
     run: playbooks/check-test/run.yml
-    nodeset: centos-7
-    semaphore: semaphore-ocp4
+    nodeset: rhel7
 
 # projects map github repos to pipelines and jobs -- they glue it all together
 # this is a named template, which makes it relatively easy to keep consistent
@@ -96,10 +94,10 @@
 
 # map job requirements to nodepool labels
 - nodeset:
-    name: centos-7
+    name: rhel7
     nodes:
       - name: controller
-        label: ocp-centos7
+        label: osp-rhel7
 
 - semaphore:
     name: semaphore-ocp4

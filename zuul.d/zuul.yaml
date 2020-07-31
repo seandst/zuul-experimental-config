@@ -26,7 +26,6 @@
         check: success
         comment: false
         merge: false
-        unlabel: 'zuul:check'
       pgsql:
     failure:
       github:

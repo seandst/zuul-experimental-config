@@ -63,7 +63,16 @@
 
 # jobs that can be run
 - job:
+    name: base
+    # I'm pretty sure these don't exist, and docs are only
+    # using them as examples, but hey, I'm curious to see
+    # exactly what happens
+    pre-run: copy-git-repos
+    post-run: copy-logs
+
+- job:
     name: check-test
+    parent: base
     description: >
       Triggered on PR opened or labeled, used to check if a PR should be
       tested by zuul, as determined by the job run. Only reports success,
@@ -95,7 +104,7 @@
     name: rhel7
     nodes:
       - name: controller
-        label: osp-rhel7
+        label: ocp-rhel7
 
 - semaphore:
     name: semaphore-ocp4

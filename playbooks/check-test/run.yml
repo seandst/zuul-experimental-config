@@ -4,3 +4,5 @@
   tasks:
     - debug:
         msg: "{{ zuul.items }}"
+    - debug:
+        msg: "This playbook actually ran!"

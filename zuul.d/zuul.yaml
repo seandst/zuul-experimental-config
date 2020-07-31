@@ -87,7 +87,7 @@
 - job:
     name: tox-ansible
     parent: oasis
-    pre: playbooks/tox-ansible/pre.yml
+    pre-run: playbooks/tox-ansible/pre.yml
 
 - job:
     name: tox-ansible-openstack-testenvs

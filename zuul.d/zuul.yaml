@@ -69,11 +69,6 @@
 # jobs that can be run
 - job:
     name: base
-    # I'm pretty sure these don't exist, and docs are only
-    # using them as examples, but hey, I'm curious to see
-    # exactly what happens
-    pre-run: copy-git-repos
-    post-run: copy-logs
 
 - job:
     name: check-test

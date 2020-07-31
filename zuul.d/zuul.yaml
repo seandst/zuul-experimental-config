@@ -21,7 +21,7 @@
       github:
         check: success
         comment: false
-        status: 'success'
+        merge: false
       pgsql:
     failure:
       pgsql:
@@ -50,19 +50,16 @@
       github:
         check: in_progress
         comment: false
-        status: 'pending'
     success:
       github:
         check: success
         comment: false
-        merge: true
-        status: 'success'
+        merge: false
       pgsql:
     failure:
       github:
         check: failure
         comment: false
-        status: 'failure'
       pgsql:
 
 - job:
@@ -81,18 +78,19 @@
       so the check-test playbook can fail and not result in a failing
       check being added to a PR. A success result or adding the "zuul:check"
       label will allow further zuul automation to run on this pull request.
-    run: playbooks/check-test/run.yml
+    run: playbooks/check-test/run.yaml
     nodeset: rhel7
 
 - job:
     name: tox-ansible
     parent: oasis
-    pre-run: playbooks/tox-ansible/pre.yml
+    pre-run: playbooks/tox-ansible/pre.yaml
+    post-run: playbooks/tox/post.yaml
 
 - job:
     name: tox-ansible-openstack-testenvs
     parent: tox-ansible
-    run: playbooks/tox-ansible-openstack-testenvs/run.yml
+    run: playbooks/tox-ansible-openstack-testenvs/run.yaml
 
 # projects map github repos to pipelines and jobs -- they glue it all together
 # this is a named template, which makes it relatively easy to keep consistent

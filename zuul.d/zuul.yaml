@@ -84,6 +84,16 @@
     run: playbooks/check-test/run.yml
     nodeset: rhel7
 
+- job:
+    name: tox-ansible
+    parent: oasis
+    pre: playbooks/tox-ansible/pre.yml
+
+- job:
+    name: tox-ansible-openstack-testenvs
+    parent: tox-ansible
+    run: playbooks/tox-ansible-openstack-testenvs/run.yml
+
 # projects map github repos to pipelines and jobs -- they glue it all together
 # this is a named template, which makes it relatively easy to keep consistent
 # test setups across the various oasis collections
@@ -93,6 +103,8 @@
       jobs:
         - check-test
       debug: true
+    check:
+        - tox-ansible-openstack-testenvs
 
 - project:
     name: seandst/ansible_collection_system

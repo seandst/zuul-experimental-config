@@ -1,0 +1,10 @@
+- name: Ensure tox is installed
+  include_role:
+    # job parent "tox" should run ensure-tox for us;
+    # including it here sets hostvars for the virtualenv path
+    # needed to install tox-ansible to the correct location
+    # from https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/ensure-tox/
+    - ensure-tox
+
+- name: Install tox-ansible to local venv
+  command: '{{ tox_venv_path }}/bin/pip install tox-ansible'

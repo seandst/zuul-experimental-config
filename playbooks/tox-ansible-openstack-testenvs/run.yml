@@ -1,0 +1,6 @@
+- hosts: all
+  roles:
+    # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/tox
+    - name: tox
+      tox_extra_args: "{{ tox_extra_args }} -l --ansible-driver openstack"
+

@@ -1,0 +1,4 @@
+- hosts: all
+  roles:
+    - ara-report
+    - fetch-output

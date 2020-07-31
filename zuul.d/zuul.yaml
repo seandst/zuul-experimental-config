@@ -73,6 +73,7 @@
 - job:
     name: oasis
     parent: base
+    post-run: playbooks/oasis/post.yaml
     description: >
       A job intended to serve as the parent job for all OASIS-specific jobs,
       for organizational purposes.

@@ -21,11 +21,6 @@
         check: success
         comment: false
         status: 'success'
-    failure:
-      github:
-        check: failure
-        comment: false
-        status: 'failure'
 
 - pipeline:
     name: check
@@ -35,7 +30,7 @@
     precedence: normal
     require:
       github:
-        status: "oasis-zuul\\[bot\\]:check-test:success"
+        status: "oasis-zuul\\[bot\\]:oasis-collections/check-test:success
         open: true
         current-patchset: true
     trigger:
@@ -46,7 +41,7 @@
       github:
         - event: pull_request
           action: status
-          status: "oasis-zuul\\[bot\\]:check-test:success"
+          status: "oasis-zuul\\[bot\\]:oasis-collections/check-test:success
     start:
       github:
         check: in_progress
@@ -65,10 +60,6 @@
         comment: false
         status: 'failure'
       pgsql:
-
-# jobs that can be run
-- job:
-    name: base
 
 - job:
     name: check-test

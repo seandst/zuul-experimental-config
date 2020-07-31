@@ -17,6 +17,9 @@
         - event: pull_request
           action: labeled
           label: 'zuul:check'
+    start:
+      github:
+        check: in_progress
     success:
       github:
         check: success
@@ -24,6 +27,8 @@
         merge: false
       pgsql:
     failure:
+      github:
+        check: cancelled
       pgsql:
 
 - pipeline:
@@ -34,7 +39,7 @@
     precedence: normal
     require:
       github:
-        status: "oasis-zuul\\[bot\\]:oasis-collections/check-test:success"
+        status: "oasis-zuul:oasis-collections/check-test:success"
         open: true
         current-patchset: true
     trigger:
@@ -45,7 +50,7 @@
       github:
         - event: pull_request
           action: status
-          status: "oasis-zuul\\[bot\\]:oasis-collections/check-test:success"
+          status: "oasis-zuul:oasis-collections/check-test:success"
     start:
       github:
         check: in_progress

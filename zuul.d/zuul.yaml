@@ -22,6 +22,9 @@
         check: success
         comment: false
         status: 'success'
+      pgsql:
+    failure:
+      pgsql:
 
 - pipeline:
     name: check

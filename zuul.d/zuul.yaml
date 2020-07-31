@@ -63,8 +63,15 @@
       pgsql:
 
 - job:
-    name: check-test
+    name: oasis
     parent: base
+    description: >
+      A job intended to serve as the parent job for all OASIS-specific jobs,
+      for organizational purposes.
+
+- job:
+    name: check-test
+    parent: oasis
     description: >
       Triggered on PR opened or labeled, used to check if a PR should be
       tested by zuul, as determined by the job run. Only reports success,

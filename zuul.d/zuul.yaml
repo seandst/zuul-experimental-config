@@ -100,10 +100,12 @@
 - project-template:
     name: oasis-ansible-collection
     check-test:
+      debug: true
       jobs:
         - check-test
-      debug: true
     check:
+      debug: true
+      jobs:
         - tox-ansible-openstack-testenvs
 
 - project:

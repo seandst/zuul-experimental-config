@@ -1,3 +1,4 @@
+---
 # All components are combined in a single config while prototyping,
 # but will be broken up once this stuff works
 
@@ -30,7 +31,7 @@
     precedence: normal
     require:
       github:
-        status: "oasis-zuul\\[bot\\]:oasis-collections/check-test:success
+        status: "oasis-zuul\\[bot\\]:oasis-collections/check-test:success"
         open: true
         current-patchset: true
     trigger:
@@ -41,7 +42,7 @@
       github:
         - event: pull_request
           action: status
-          status: "oasis-zuul\\[bot\\]:oasis-collections/check-test:success
+          status: "oasis-zuul\\[bot\\]:oasis-collections/check-test:success"
     start:
       github:
         check: in_progress

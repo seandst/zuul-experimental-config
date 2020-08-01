@@ -125,7 +125,7 @@
     name: rhel7
     nodes:
       - name: controller
-        label: ocp-rhel7
+        label: osp-rhel7
 
 - semaphore:
     name: semaphore-ocp4

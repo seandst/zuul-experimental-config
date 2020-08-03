@@ -41,7 +41,7 @@
     precedence: normal
     require:
       github:
-        status: "oasis-zuul:oasis-collections/check-test:success"
+        # don't bother running on old commits or closed PRs
         open: true
         current-patchset: true
     trigger:
@@ -52,7 +52,8 @@
       github:
         - event: pull_request
           action: status
-          status: "oasis-zuul:oasis-collections/check-test:success"
+          status:
+            - "oasis-zuul:oasis-collections/check-test:success"
     start:
       github:
         check: in_progress

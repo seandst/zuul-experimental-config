@@ -3,6 +3,6 @@
     - all
   tasks:
     - debug:
-        msg: "{{ zuul.items }}"
+        var: zuul
     - debug:
         msg: "This playbook actually ran!"

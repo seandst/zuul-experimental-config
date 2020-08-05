@@ -88,7 +88,7 @@
       check being added to a PR. A success result or adding the "zuul:check"
       label will allow further zuul automation to run on this pull request.
     run: playbooks/check-test/run.yaml
-    nodeset: rhel7-single
+    nodeset: generic-runner
 
 - job:
     name: tox-ansible
@@ -123,11 +123,7 @@
 
 # map job requirements to nodepool labels
 - nodeset:
-    name: rhel7-single
+    name: generic-runner
     nodes:
-      - name: rhel7
-        label: ocp-rhel7
-
-- semaphore:
-    name: semaphore-ocp4
-    max: 8
+      - name: runner
+        label: ocp-runner

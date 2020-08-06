@@ -73,6 +73,7 @@
 - job:
     name: oasis
     parent: null
+    attempts: 1
     pre-run: playbooks/oasis/pre.yaml
     post-run: playbooks/oasis/post.yaml
     vars:

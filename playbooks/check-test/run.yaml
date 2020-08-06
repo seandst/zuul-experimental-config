@@ -1,6 +1,5 @@
-- name: check-test debug
-  hosts:
-    - all
+- hosts: localhost
+  gather_facts: false
   tasks:
     - debug:
         var: zuul

@@ -8,7 +8,7 @@
     manager: independent
     precedence: normal
     trigger:
-      github:
+      github.com:
         - event: pull_request
           action:
             - opened
@@ -18,17 +18,17 @@
           action: labeled
           label: 'zuul:check'
     start:
-      github:
+      github.com:
         check: in_progress
         comment: false
     success:
-      github:
+      github.com:
         check: success
         comment: false
         merge: false
       pgsql:
     failure:
-      github:
+      github.com:
         check: cancelled
         comment: false
       pgsql:
@@ -40,7 +40,7 @@
     manager: independent
     precedence: normal
     require:
-      github:
+      github.com:
         # don't bother running on old commits or closed PRs
         open: true
         current-patchset: true
@@ -49,23 +49,23 @@
       # update to the PR, but that should happen automatically once
       # the zuul:check label is applied, or if the check-test automation
       # otherwise succeeds
-      github:
+      github.com:
         - event: pull_request
           action: status
           status:
             - "oasis-zuul:oasis-collections/check-test:success"
     start:
-      github:
+      github.com:
         check: in_progress
         comment: false
     success:
-      github:
+      github.com:
         check: success
         comment: false
         merge: false
       pgsql:
     failure:
-      github:
+      github.com:
         check: failure
         comment: false
       pgsql:
@@ -82,7 +82,7 @@
       ara_report_path: ara-report
       ara_compress_html: false
     roles:
-      - zuul: opendev/zuul/zuul-jobs
+      - zuul: opendev.org/zuul/zuul-jobs
     description: >
       A job intended to serve as the parent job for all OASIS-specific jobs,
       sets up environment for job execution and logging.

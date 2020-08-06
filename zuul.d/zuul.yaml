@@ -72,11 +72,17 @@
 
 - job:
     name: oasis
-    parent: base
+    parent: null
+    pre-run: playbooks/oasis/pre.yaml
     post-run: playbooks/oasis/post.yaml
+    vars:
+      ara_report_executable: "/usr/local/lib/zuul/ansible/{{ ansible_version.major }}.{{ ansible_version.minor }}/bin/ara"
+      ara_report_type: html
+      ara_report_path: ara-report
+      ara_compress_html: false
     description: >
       A job intended to serve as the parent job for all OASIS-specific jobs,
-      for organizational purposes.
+      sets up environment for job execution and logging.
 
 - job:
     name: check-test

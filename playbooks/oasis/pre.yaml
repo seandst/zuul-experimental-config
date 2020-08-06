@@ -1,0 +1,36 @@
+# Based on:
+# https://github.com/ansible/project-config/blob/master/playbooks/base-minimal/pre.yaml
+# Not sure why roles are called with include_role, and not as playbook roles.
+# There are openshift/pod specific roles, so some care will likely be need to be taken
+# in playbooks to "do the right thing" in workspace prep.
+- hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Run emit-job-header role
+      # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/emit-job-header
+      include_role:
+        name: emit-job-header
+
+    - name: Run log-inventory role
+      # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/log-inventory
+      include_role:
+        name: log-inventory
+
+- hosts: all
+  tasks:
+    - name: Run add-build-sshkey role
+      # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/add-build-sshkey
+      include_role:
+        name: add-build-sshkey
+
+    - name: Run start-zuul-console role
+      # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/start-zuul-console
+      include_role:
+        name: start-zuul-console
+
+- hosts: all
+  tasks:
+    - name: Run prepare-workspace-git role
+      # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/prepare-workspace-git
+      include_role:
+        name: prepare-workspace-git

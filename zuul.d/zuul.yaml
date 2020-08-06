@@ -81,6 +81,8 @@
       ara_report_type: html
       ara_report_path: ara-report
       ara_compress_html: false
+    roles:
+      - zuul: opendev/zuul/zuul-jobs
     description: >
       A job intended to serve as the parent job for all OASIS-specific jobs,
       sets up environment for job execution and logging.

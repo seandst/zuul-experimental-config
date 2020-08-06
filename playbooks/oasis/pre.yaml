@@ -18,18 +18,11 @@
 
 - hosts: all
   tasks:
-    - name: Run add-build-sshkey role
-      # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/add-build-sshkey
-      include_role:
-        name: add-build-sshkey
-
     - name: Run start-zuul-console role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/start-zuul-console
       include_role:
         name: start-zuul-console
 
-- hosts: all
-  tasks:
     - name: Run prepare-workspace-git role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/prepare-workspace-git
       include_role:

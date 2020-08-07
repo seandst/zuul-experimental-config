@@ -18,6 +18,18 @@
 
 - hosts: all
   tasks:
+    - block:
+      - name: Ensure ansible_user_dir is set
+        set_fact:
+          ansible_user_dir: /tmp/oasis-zuul-ci
+
+      - name: Ensure ansible_user_dir exists
+        file:
+          state: directory
+          path: "{{ ansible_user_dir }}"
+          mode: 0o775
+      when: ansible_user_dir is undefined
+
     - name: Run start-zuul-console role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/start-zuul-console
       include_role:

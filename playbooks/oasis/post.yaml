@@ -2,6 +2,8 @@
   # https://github.com/ansible/project-config/blob/master/playbooks/base-minimal/post-logs.yaml
 - hosts: localhost
   gather_facts: false
+  vars:
+    zuul_output_dir: /var/lib/zuul/builds/zuul-output
   tasks:
     - name: Run ara-report role
       include_role:
@@ -21,6 +23,6 @@
       vars:
         zuul_log_path_shard_build: true
 
-    - name: Uh...fetch logs? Maybe?
+    - name: Name fetch job output to executor
       include_role:
         name: fetch-output

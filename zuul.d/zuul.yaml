@@ -136,4 +136,4 @@
     name: generic-runner
     nodes:
       - name: runner
-        label: ocp-runner
+        label: osp-runner

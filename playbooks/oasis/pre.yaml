@@ -4,15 +4,12 @@
 # There are openshift/pod specific roles, so some care will likely be need to be taken
 # in playbooks to "do the right thing" in workspace prep.
 - hosts: localhost
+  gather_facts: false
   tasks:
     - name: Run emit-job-header role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/emit-job-header
       include_role:
         name: emit-job-header
-
-    - name: Ensure output dirs exist
-      include_role:
-        name: ensure-output-dirs
 
     - name: Run log-inventory role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/log-inventory
@@ -25,6 +22,10 @@
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/start-zuul-console
       include_role:
         name: start-zuul-console
+
+    - name: Ensure output dirs exist
+      include_role:
+        name: ensure-output-dirs
 
     - name: Run prepare-workspace-git role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/prepare-workspace-git

@@ -18,6 +18,17 @@
 
 - hosts: all
   tasks:
+    # This is sorta evil, but if ansible's already connecting with
+    # an untrusted host key, we might as well take advantage of that
+    # to get other ssh-based tools (e.g. rsync) working with the known
+    # and implicitly trusted key
+    - name: Install remote host key locally
+      delegate_to: localhost
+      known_hosts:
+        name: "{{ ansible_fqdn }}"
+        key: "{{ ansible_ssh_host_key_rsa_public }}"
+        state: present
+
     - name: Run start-zuul-console role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/start-zuul-console
       include_role:

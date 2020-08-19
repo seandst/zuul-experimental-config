@@ -17,6 +17,16 @@
 
 - hosts: all
   tasks:
+    # Ensure this matches the state:present counterpart in pre.yaml
+    # This helps ensure the executor's known_hosts file from
+    # perpetually increasing in size for the life of the worker
+    - name: Install remote host key locally
+      delegate_to: localhost
+      known_hosts:
+        name: "{{ ansible_fqdn }}"
+        key: "{{ ansible_ssh_host_key_rsa_public }}"
+        state: absent
+
     - name: Fetch job output to executor
       include_role:
         name: fetch-output

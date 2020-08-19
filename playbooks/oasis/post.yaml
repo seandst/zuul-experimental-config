@@ -15,12 +15,8 @@
       include_role:
         name: generate-zuul-manifest
 
-    - name: Set zuul-log-path fact
-      include_role:
-        name: set-zuul-log-path-fact
-      vars:
-        zuul_log_path_shard_build: true
-
+- hosts: all
+  tasks:
     - name: Fetch job output to executor
       include_role:
         name: fetch-output

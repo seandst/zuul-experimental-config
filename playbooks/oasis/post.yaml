@@ -24,7 +24,7 @@
       delegate_to: localhost
       known_hosts:
         name: "{{ ansible_fqdn }}"
-        key: "{{ ansible_ssh_host_key_rsa_public }}"
+        key: "{{ ansible_fqdn }} ssh-rsa {{ ansible_ssh_host_key_rsa_public }}"
         state: absent
 
     - name: Fetch job output to executor

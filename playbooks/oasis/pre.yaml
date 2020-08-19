@@ -4,7 +4,6 @@
 # There are openshift/pod specific roles, so some care will likely be need to be taken
 # in playbooks to "do the right thing" in workspace prep.
 - hosts: localhost
-  gather_facts: false
   tasks:
     - name: Run emit-job-header role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/emit-job-header

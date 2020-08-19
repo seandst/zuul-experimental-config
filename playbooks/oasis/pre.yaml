@@ -11,6 +11,10 @@
       include_role:
         name: emit-job-header
 
+    - name: Ensure output dirs exist
+      include_role:
+        name: ensure-output-dirs
+
     - name: Run log-inventory role
       # https://opendev.org/zuul/zuul-jobs/src/branch/master/roles/log-inventory
       include_role:

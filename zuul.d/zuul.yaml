@@ -81,6 +81,7 @@
       ara_report_type: html
       ara_report_path: ara-report
       ara_compress_html: false
+      zuul_output_dir: /tmp/zuul-output
     roles:
       - zuul: opendev.org/zuul/zuul-jobs
     description: >

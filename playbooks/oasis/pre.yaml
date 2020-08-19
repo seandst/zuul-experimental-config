@@ -25,8 +25,8 @@
     - name: Install remote host key locally
       delegate_to: localhost
       known_hosts:
-        name: "{{ ansible_fqdn }}"
-        key: "{{ ansible_fqdn }} ssh-rsa {{ ansible_ssh_host_key_rsa_public }}"
+        name: "{{ inventory_hostname }}"
+        key: "{{ inventory_hostname }} ssh-rsa {{ ansible_ssh_host_key_rsa_public }}"
         state: present
 
     - name: Run start-zuul-console role

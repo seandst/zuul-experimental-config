@@ -2,6 +2,6 @@
   gather_facts: false
   tasks:
     - debug:
-        var: zuul
+        var: vars
     - debug:
         msg: "This playbook actually ran!"

@@ -118,11 +118,9 @@
 - project-template:
     name: oasis-ansible-collection
     check-test:
-      debug: true
       jobs:
         - check-test
     check:
-      debug: true
       jobs:
         - tox-ansible-openstack-testenvs
 
